@@ -3,7 +3,6 @@ require 'mikunyan/decoders'
 require 'rmagick'
 require 'fileutils'
 require 'logger'
-require 'pp'
 
 logger = Logger.new(STDOUT)
 
@@ -25,6 +24,9 @@ ARGV.each {|arg|
             rmg = rmg.flop
             rmg = rmg.rotate(180)
             rmg.write(name)
+        elsif obj.type == "TextAsset"
+            name = path.dirname.to_s + "/" + obj.m_Name.value + ".txt"
+            File.write(name, obj.m_Script.value)
         end
       }
     }
